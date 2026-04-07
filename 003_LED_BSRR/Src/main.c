@@ -17,8 +17,12 @@ int main(void)
     /* Loop forever */
 	while (1)
     {
-        GPIOD->ODR ^= PIN13; // Set pin 13 (turn on LED)
+        GPIOD->BSRR = PIN13; // Set pin 13 (turn on LED)
         for (int i = 0; i < 1000000; i++); // Delay
+
+        GPIOD->BSRR = (1<<29); // Reset pin 13 (turn off LED)
+        for (int i = 0; i < 1000000; i++); // Delay
+
         
     }
     return 0;
