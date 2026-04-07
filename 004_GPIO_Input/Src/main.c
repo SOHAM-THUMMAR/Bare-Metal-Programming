@@ -28,11 +28,14 @@ int main(void)
     {
         if (GPIOA->IDR & PIN0)
         {
-            GPIOD->BSRR = PIN12;          // ON
-        }
-        else
-        {
-            GPIOD->BSRR = (PIN12 << 16);  // OFF
+            if (GPIOD->ODR & PIN12)
+            {
+                GPIOD->BSRR = (PIN12 << 16);  // OFF
+            }
+            else
+            {
+                GPIOD->BSRR = PIN12;          // ON
+            }
         }
     }
 }
